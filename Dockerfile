@@ -16,10 +16,10 @@ COPY --from=build-env /app/out .
 #create trakt api app at https://trakt.tv/oauth/applications/new
 #Only important field is Redirect uri, which should be 
 # http://IP:5001/Home/TraktReturn (modify hostname and port for your own needs. Localhost works perfectly fine for development)
-ENV TRAKT_CLIENTID
-ENV TRAKT_CLIENT_SECRET
+#ENV TRAKT_CLIENTID
+#ENV TRAKT_CLIENT_SECRET
 # just put a random hash there
-ENV PLEX_CLIENT_SECRET
+#ENV PLEX_CLIENT_SECRET
 
 EXPOSE 80
 ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
