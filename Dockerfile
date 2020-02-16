@@ -15,4 +15,4 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 VOLUME /app/Properties
 EXPOSE 80
-ENTRYPOINT ["dotnet", "trakttoplex.dll"]
+ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
