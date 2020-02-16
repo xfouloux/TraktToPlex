@@ -13,6 +13,13 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine
 WORKDIR /app
 COPY --from=build-env /app/out .
-VOLUME /app/Properties
+#create trakt api app at https://trakt.tv/oauth/applications/new
+#Only important field is Redirect uri, which should be 
+# http://IP:5001/Home/TraktReturn (modify hostname and port for your own needs. Localhost works perfectly fine for development)
+ENV TRAKT_CLIENTID
+ENV TRAKT_CLIENT_SECRET
+# just put a random hash there
+ENV PLEX_CLIENT_SECRET
+
 EXPOSE 80
 ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
