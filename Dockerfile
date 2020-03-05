@@ -22,4 +22,4 @@ ENV TRAKT_CLIENT_SECRET changeme
 ENV PLEX_CLIENT_SECRET changeme
 
 EXPOSE 80
-ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
+ENTRYPOINT ["dotnet", "/app/out/TraktToPlex.dll"]
