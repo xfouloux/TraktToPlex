@@ -7,7 +7,11 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY /TraktToPlex/* ./
-RUN dotnet publish -c Release -o out
+
+RUN dotnet build -c Release --no-restore
+RUN dotnet test -c Release --no-build --no-restore
+
+RUN dotnet publish -c Release -o out --no-restore
 
 RUN ls /app/out/
 
