@@ -9,6 +9,8 @@ RUN dotnet restore
 COPY /TraktToPlex/* ./
 RUN dotnet publish -c Release -o out
 
+RUN ls /app/out/
+
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine
 WORKDIR /app
@@ -20,6 +22,8 @@ ENV TRAKT_CLIENTID changeme
 ENV TRAKT_CLIENT_SECRET changeme
 # just put a random hash there
 ENV PLEX_CLIENT_SECRET changeme
+
+RUN ls /app
 
 EXPOSE 80
 
