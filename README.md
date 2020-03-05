@@ -5,10 +5,12 @@ Sync watched status from Trakt to Plex Media Server
 
 ### TRAKT
 You need to create an API App on trakt website first at https://trakt.tv/oauth/applications/new
-
-Here are some example snippets to help you get started creating a container.
+Only important field is Redirect uri, which should be http://localhost:80/Home/TraktReturn 
+(modify hostname and port for your own needs. Localhost works perfectly fine for development)
 
 ### docker
+Here are some example snippets to help you get started creating a container.
+
 
 ```
 docker create \
