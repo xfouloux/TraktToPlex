@@ -14,7 +14,7 @@ Here are some example snippets to help you get started creating a container.
 
 ```
 docker create \
-  --name=jackett \
+  --name=trakttoplex \
   -e TRAKT_CLIENTID=<YOUR_TRAKT_CLIENT_ID> # create trakt api app at https://trakt.tv/oauth/applications/new \
   -e TRAKT_CLIENT_SECRET=<YOUR_TRAKT_CLIENT_SECRET> #create trakt api app at https://trakt.tv/oauth/applications/new \
   -e PLEX_CLIENT_SECRET=<YOUR_PLEX_CLIENT_SECRET> #RANDOM NUMBER+LETTER \
