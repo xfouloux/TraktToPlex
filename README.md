@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ft1s37y2dfqs435g?svg=true)](https://ci.appveyor.com/project/xfouloux/trakttoplex) 
+![Docker Pulls](https://img.shields.io/docker/pulls/sclemenceau/trakttoplex?style=flat-square)
+
 # TraktToPlex
 Sync watched status from Trakt to Plex Media Server
 From https://github.com/Inrego/TraktToPlex
