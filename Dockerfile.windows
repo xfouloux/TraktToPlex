@@ -9,16 +9,14 @@ RUN dotnet restore
 # Copy everything else and build
 COPY /TraktToPlex/* ./
 RUN dotnet build -c Release -o /app
-RUN ls /app
 
 FROM build AS publish
 RUN dotnet publish -c Release -o /app
-RUN ls /app
 
 # Build runtime image
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 COPY /TraktToPlex/ ./
-RUN ls /app
+
 ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
