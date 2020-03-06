@@ -4,8 +4,6 @@ Write-Host Starting build
 if ($isWindows) {
   docker build --pull -t whoami -f Dockerfile.windows .
 } else {
-  cat /proc/cpuinfo 
-  docker info
   if($env:ARCH == "arm"){
 	docker build -t whoami -f Dockerfile.arm --build-arg "arch=$env:ARCH" .
   }else{
