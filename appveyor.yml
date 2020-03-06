@@ -1,6 +1,13 @@
 version: 1.0.{build}
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
 image:
-- Visual Studio 2017
+- Visual Studio 2015
 - Ubuntu
 
 environment:
@@ -11,9 +18,9 @@ environment:
 
 matrix:
   exclude:
-    - image: Visual Studio 2017
+    - image: Visual Studio 2015
       ARCH: arm
-    - image: Visual Studio 2017
+    - image: Visual Studio 2015
       ARCH: arm64
 
 build_script:
