@@ -23,9 +23,13 @@ matrix:
   exclude:
     - image: Ubuntu
       VERSION : 1709
+    - image: Ubuntu
       VERSION : 1803
+    - image: Ubuntu
       VERSION : 1809
+    - image: Ubuntu
       VERSION : 1903
+    - image: Ubuntu
       VERSION : 1909
 
 build_script:
