@@ -1,6 +1,7 @@
 # TraktToPlex
 Sync watched status from Trakt to Plex Media Server
 From https://github.com/Inrego/TraktToPlex
+My Fork https://github.com/xfouloux/TraktToPlex
 
 ## Usage
 
