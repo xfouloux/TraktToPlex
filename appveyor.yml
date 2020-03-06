@@ -12,13 +12,13 @@ image:
 
 environment:
   matrix:
-    - ARCH: arm
+#    - ARCH: arm
     - ARCH: amd64
 
-matrix:
-  exclude:
-    - image: Visual Studio 2019
-      ARCH: arm
+#matrix:
+#  exclude:
+#    - image: Visual Studio 2019
+#      ARCH: arm
 
 build_script:
   - ps: ./build.ps1
