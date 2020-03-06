@@ -12,13 +12,21 @@ image:
 
 environment:
   matrix:
-#    - ARCH: arm
+    - VERSION : 1709
+    - VERSION : 1803
+    - VERSION : 1809
+    - VERSION : 1903
+    - VERSION : 1909
     - ARCH: amd64
-
-#matrix:
-#  exclude:
-#    - image: Visual Studio 2019
-#      ARCH: arm
+    
+matrix:
+  exclude:
+    - image: Ubuntu
+      VERSION : 1709
+      VERSION : 1803
+      VERSION : 1809
+      VERSION : 1903
+      VERSION : 1909
 
 build_script:
   - ps: ./build.ps1
