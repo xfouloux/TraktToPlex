@@ -8,7 +8,6 @@ if ($isWindows) {
 	}else{
 		docker build --pull -t whoami -f Dockerfile.windows .
 	}
-}
 } else {
 	docker build -t whoami --build-arg "arch=$env:ARCH" .
 }
