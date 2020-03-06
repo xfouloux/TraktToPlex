@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop';
+#$ErrorActionPreference = 'Stop';
 
 if (! (Test-Path Env:\APPVEYOR_REPO_TAG_NAME)) {
   Write-Host "No version tag detected. Skip publishing."
@@ -12,7 +12,7 @@ Write-Host Starting deploy
 if (!(Test-Path ~/.docker)) { mkdir ~/.docker }
 
 '{ "experimental": "enabled" }' | Out-File ~/.docker/config.json -Encoding Ascii
-docker login -u="$env:DOCKER_USER" --password-stdin="$env:DOCKER_PASS"
+docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
 
 $os = If ($isWindows) {"windows"} Else {"linux"}
 docker tag whoami "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
