@@ -28,15 +28,11 @@ if ($isWindows) {
   if ($env:ARCH -eq "amd64") {
 	 Write-Host "Pushing manifest $($image):$env:APPVEYOR_REPO_TAG_NAME"
     # The last in the build matrix
-    docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-    docker manifest push "$($image):$env:APPVEYOR_REPO_TAG_NAME"
+    docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME"
+	docker manifest push "$($image):$env:APPVEYOR_REPO_TAG_NAME"
 	#LATEST
     Write-Host "Pushing manifest $($image):latest"
-    docker -D manifest create "$($image):latest" `
-      "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
-    docker manifest push "$($image):latest"
+    docker -D manifest create "$($image):latest" "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME"
+	docker manifest push "$($image):latest"
   }
 }
