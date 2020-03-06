@@ -7,7 +7,7 @@ branches:
     - master
 
 image:
-- Visual Studio 2015
+- Visual Studio 2019
 - Ubuntu
 
 environment:
@@ -18,9 +18,9 @@ environment:
 
 matrix:
   exclude:
-    - image: Visual Studio 2015
+    - image: Visual Studio 2019
       ARCH: arm
-    - image: Visual Studio 2015
+    - image: Visual Studio 2019
       ARCH: arm64
 
 build_script:

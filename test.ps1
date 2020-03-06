@@ -1,6 +1,6 @@
 Write-Host Starting test
 
-if ($env:ARCH -ne "amd64") {
+if ($env:ARCH -ne "ar64") {
   Write-Host "Arch $env:ARCH detected. Skip testing."
   exit 0
 }
