@@ -1,34 +1,24 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine AS base
 WORKDIR /app
 
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS build
+WORKDIR /src
 # Copy csproj and restore as distinct layers
 COPY /TraktToPlex/*.csproj ./
 RUN dotnet restore
-
 # Copy everything else and build
 COPY /TraktToPlex/* ./
-
-RUN dotnet build -c Release --no-restore
-RUN dotnet test -c Release --no-build --no-restore
-
-RUN dotnet publish -c Release -o out --no-restore
-
-RUN ls /app/out/
-
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine
-WORKDIR /app
-COPY --from=build-env /app/out .
-#create trakt api app at https://trakt.tv/oauth/applications/new
-#Only important field is Redirect uri, which should be 
-# http://IP:5001/Home/TraktReturn (modify hostname and port for your own needs. Localhost works perfectly fine for development)
-ENV TRAKT_CLIENTID changeme
-ENV TRAKT_CLIENT_SECRET changeme
-# just put a random hash there
-ENV PLEX_CLIENT_SECRET changeme
-
+RUN dotnet build -c Release -o /app
 RUN ls /app
 
-EXPOSE 80
+FROM build AS publish
+RUN dotnet publish -c Release -o /app
+RUN ls /app
 
+# Build runtime image
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+COPY /TraktToPlex/ ./
+RUN ls /app
 ENTRYPOINT ["dotnet", "TraktToPlex.dll"]
