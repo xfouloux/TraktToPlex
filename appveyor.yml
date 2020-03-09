@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 3.1.{build}
 
 # branches to build
 branches:
@@ -31,12 +31,12 @@ environment:
     - job_name: Linux ARM 32v7
       ARCH: arm
       ARCHVERSION: arm32v7
-      platform: buster
+      platform: bionic
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Linux ARM 64v8
       ARCH: arm64
       ARCHVERSION: arm64v8
-      platform: buster
+      platform: bionic
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Linux amd64
       ARCH: amd64
