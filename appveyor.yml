@@ -7,14 +7,11 @@ branches:
     - master
 
 image:
-#- Visual Studio 2019
-  - Windows Server 2019
+  - Visual Studio 2019
   - Ubuntu
 
 environment:
   matrix:
-    - VERSION : 1709
-      image: mcr.microsoft.com/windows/nanoserver:1709
     - VERSION : 1803
       image: mcr.microsoft.com/windows/nanoserver:1803
     - VERSION : 1809
