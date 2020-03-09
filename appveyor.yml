@@ -1,14 +1,10 @@
-version: 1.0.{build}
+version: 2.2.{build}
 
 # branches to build
 branches:
   # whitelist
   only:
     - master
-
-#image:
-#  - Visual Studio 2019
-#  - Ubuntu
 
 environment:
   dotnet_version: 2.2
@@ -32,11 +28,11 @@ environment:
 #    - job_name: Windows 1909
 #      VERSION : 1909
 #      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    - job_name: Linux ARM 32v7
-      ARCH: arm
-      ARCHVERSION: arm32v7
-      platform: bionic
-      APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+#    - job_name: Linux ARM 32v7
+#      ARCH: arm
+#      ARCHVERSION: arm32v7
+#      platform: bionic
+#      APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Linux amd64
       ARCH: amd64
       platform: alpine
@@ -44,17 +40,6 @@ environment:
     
 matrix:
   fast_finish: true
-#  exclude:
-#    - image: Ubuntu
-#      VERSION : 1709
-#    - image: Ubuntu
-#      VERSION : 1803
-#    - image: Ubuntu
-#      VERSION : 1809
-#    - image: Ubuntu
-#      VERSION : 1903
-#    - image: Ubuntu
-#      VERSION : 1909
 
 build_script:
   - ps: ./build.ps1
