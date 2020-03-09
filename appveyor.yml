@@ -4,14 +4,10 @@ version: 1.0.{build}
 branches:
   # whitelist
   only:
-    - master
-
-#image:
-#  - Visual Studio 2019
-#  - Ubuntu
+    - dotnet3.1
 
 environment:
-  dotnet_version: 2.2
+  dotnet_version: 3.1
   matrix:
     - job_name: Windows LATEST amd64
       ARCH: amd64
@@ -35,7 +31,12 @@ environment:
     - job_name: Linux ARM 32v7
       ARCH: arm
       ARCHVERSION: arm32v7
-      platform: bionic
+      platform: buster
+      APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+    - job_name: Linux ARM 64v8
+      ARCH: arm64
+      ARCHVERSION: arm64v8
+      platform: buster
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Linux amd64
       ARCH: amd64
@@ -44,17 +45,6 @@ environment:
     
 matrix:
   fast_finish: true
-#  exclude:
-#    - image: Ubuntu
-#      VERSION : 1709
-#    - image: Ubuntu
-#      VERSION : 1803
-#    - image: Ubuntu
-#      VERSION : 1809
-#    - image: Ubuntu
-#      VERSION : 1903
-#    - image: Ubuntu
-#      VERSION : 1909
 
 build_script:
   - ps: ./build.ps1
