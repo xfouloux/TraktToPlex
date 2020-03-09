@@ -6,9 +6,10 @@ branches:
   only:
     - master
 
-#image:
+image:
 #- Visual Studio 2019
-#- Ubuntu
+  - Windows Server 2019
+  - Ubuntu
 
 environment:
   matrix:
