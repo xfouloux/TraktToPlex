@@ -14,12 +14,15 @@ environment:
   dotnet_version: 2.2
   matrix:
     - job_name: Windows LATEST amd64
+      ARCH: amd64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     - job_name: Windows 1803 amd64
+      ARCH: amd64
       VERSION : 1803
       platform: nanoserver
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     - job_name: Windows 1809 amd64
+      ARCH: amd64
       VERSION : 1809
       platform: nanoserver
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019

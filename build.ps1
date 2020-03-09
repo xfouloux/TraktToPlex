@@ -13,7 +13,7 @@ if ($isWindows) {
 	if ($env:ARCHVERSION) {
 		docker build -t whoami -f "Dockerfile.$env:ARCH" --build-arg "archversion=$env:ARCHVERSION" --build-arg "platform=$env:platform" --build-arg "dotnet_version=$env:dotnet_version" .
 	}else{
-		docker build -t whoami --build-arg "arch=$env:ARCH" --build-arg "platform=$env:platform" --build-arg "dotnet_version=$env:dotnet_version" .
+		docker build -t whoami --build-arg "platform=$env:platform" --build-arg "dotnet_version=$env:dotnet_version" .
 	}
 }
 
