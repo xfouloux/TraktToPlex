@@ -20,39 +20,51 @@ if ($isWindows) {
 	# Windows
 	if ($env:VERSION) {
 	Write-Host "$os image to produce $env:VERSION variant"
-	docker tag whoami "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-$env:VERSION"
-	docker push "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-$env:VERSION"
+	docker tag whoami "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version-$env:VERSION"
+	docker push "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version-$env:VERSION"
 	}else{
 		Write-Host "$os image"
-		docker tag whoami "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME"
-		docker push "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME"
+		docker tag whoami "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version"
+		docker push "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version"
 	}
 }else{
   # Linux
   Write-Host "$os image $env:ARCH $env:ARCHVERSION"
-  docker tag whoami "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME"
-  docker push "$($image):$os-$env:ARCH-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME"
+  docker tag whoami "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version"
+  docker push "$($image):$env:APPVEYOR_REPO_TAG_NAME-$os-$env:ARCH-dotnet-$env:dotnet_version"
   
   if ($env:ARCH -eq "amd64") {
+	#TAG
 	Write-Host "Pushing manifest $($image):$env:APPVEYOR_REPO_TAG_NAME"
-    # The last in the build matrix
     docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):linux-arm-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):linux-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-1809"
-    docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v7
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1803" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1809"
+    docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" --os linux --arch arm --variant v7
     docker manifest push "$($image):$env:APPVEYOR_REPO_TAG_NAME"
+	
+	#DOTNET VERSION
+	Write-Host "Pushing manifest $($image):dotnet-$env:dotnet_version-latest"
+    docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1803" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1809"
+    docker manifest annotate "$($image):dotnet-$env:dotnet_version-latest" "$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" --os linux --arch arm --variant v7
+    docker manifest push "$($image):dotnet-$env:dotnet_version-latest"
+	
 	#LATEST
     Write-Host "Pushing manifest $($image):latest"
     docker -D manifest create "$($image):latest" `
-	"$($image):linux-arm-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):linux-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-	"$($image):windows-amd64-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME-1809"
-    docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm-dotnet-$env:dotnet_version-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v7
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1803" `
+	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1809"
+    docker manifest annotate "$($image):latest" "$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-arm-dotnet-$env:dotnet_version" --os linux --arch arm --variant v7
     docker manifest push "$($image):latest"
   }
 }
