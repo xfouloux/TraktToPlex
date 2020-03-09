@@ -10,8 +10,8 @@ if ($isWindows) {
 		docker build --pull -t whoami --isolation=hyperv -f Dockerfile.windows .
 	}
 } else {
-	if ($env:ARCH == 'arm32v7') {
-		docker build -t whoami -f Dockerfile.arm32v7 --build-arg "arch=$env:ARCH" .
+	if ($env:ARCHVERSION) {
+		docker build -t whoami -f "Dockerfile.$env:ARCH" --build-arg "archversion=$env:ARCHVERSION" .
 	}else{
 		docker build -t whoami --build-arg "arch=$env:ARCH" .
 	}

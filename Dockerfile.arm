@@ -1,7 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine-arm32v7 AS base
+ARG archversion
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine-${archversion} AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine-arm32v7 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine-${archversion} AS build
 WORKDIR /src
 # Copy csproj and restore as distinct layers
 COPY /TraktToPlex/*.csproj ./

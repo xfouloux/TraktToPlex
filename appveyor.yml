@@ -12,20 +12,23 @@ branches:
 
 environment:
   matrix:
+    - job_name: Windows LATEST
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     - job_name: Windows 1803
       VERSION : 1803
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     - job_name: Windows 1809
       VERSION : 1809
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    - job_name: Windows 1903
-      VERSION : 1903
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    - job_name: Windows 1909
-      VERSION : 1909
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+#    - job_name: Windows 1903
+#      VERSION : 1903
+#      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+#    - job_name: Windows 1909
+#      VERSION : 1909
+#      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     - job_name: Ubuntu
-      ARCH: arm32v7
+      ARCH: arm
+      ARCHVERSION: arm32v7
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Ubuntu
       ARCH: amd64
