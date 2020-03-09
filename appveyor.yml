@@ -6,34 +6,44 @@ branches:
   only:
     - master
 
-image:
-  - Visual Studio 2019
-  - Ubuntu
+#image:
+#  - Visual Studio 2019
+#  - Ubuntu
 
 environment:
   matrix:
-    - VERSION : 1803
-      image: mcr.microsoft.com/windows/nanoserver:1803
-    - VERSION : 1809
-      image: mcr.microsoft.com/windows/nanoserver:1809
-    - VERSION : 1903
-      image: mcr.microsoft.com/windows/nanoserver:1903
-    - VERSION : 1909
-      image: mcr.microsoft.com/windows/nanoserver:1909
-    - ARCH: amd64
+    - job_name: Windows 1803
+      VERSION : 1803
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - job_name: Windows 1809
+      VERSION : 1809
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - job_name: Windows 1903
+      VERSION : 1903
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - job_name: Windows 1909
+      VERSION : 1909
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    - job_name: Ubuntu
+      ARCH: arm32v7
+      APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+    - job_name: Ubuntu
+      ARCH: amd64
+      APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     
 matrix:
-  exclude:
-    - image: Ubuntu
-      VERSION : 1709
-    - image: Ubuntu
-      VERSION : 1803
-    - image: Ubuntu
-      VERSION : 1809
-    - image: Ubuntu
-      VERSION : 1903
-    - image: Ubuntu
-      VERSION : 1909
+  fast_finish: true
+#  exclude:
+#    - image: Ubuntu
+#      VERSION : 1709
+#    - image: Ubuntu
+#      VERSION : 1803
+#    - image: Ubuntu
+#      VERSION : 1809
+#    - image: Ubuntu
+#      VERSION : 1903
+#    - image: Ubuntu
+#      VERSION : 1909
 
 build_script:
   - ps: ./build.ps1
