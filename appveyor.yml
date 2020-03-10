@@ -34,7 +34,7 @@ environment:
       platform: bionic
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     - job_name: Linux ARM 64v8
-      ARCH: arm64
+      ARCH: arm
       ARCHVERSION: arm64v8
       platform: bionic
       APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
