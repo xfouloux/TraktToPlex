@@ -9,13 +9,13 @@ FROM mcr.microsoft.com/dotnet/core/sdk:${dotnet_version}-${platform}-${archversi
 WORKDIR /src
 # Copy csproj and restore as distinct layers
 COPY /TraktToPlex/*.csproj ./
-RUN dotnet restore
+RUN dotnet restore -r linux-arm
 # Copy everything else and build
 COPY /TraktToPlex/* ./
-RUN dotnet build -c Release -o /app
+RUN dotnet build -r linux-arm -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish -r linux-arm -c Release -o /app
 
 # Build runtime image
 FROM base AS final
