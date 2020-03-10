@@ -50,7 +50,7 @@ if ($isWindows) {
 	
 	#DOTNET VERSION
 	Write-Host "Pushing manifest $($image):dotnet-$env:dotnet_version-latest"
-    docker -D manifest create "$($image):$env:APPVEYOR_REPO_TAG_NAME" `
+    docker -D manifest create "$($image):dotnet-$env:dotnet_version-latest" `
 	"$($image):$env:APPVEYOR_REPO_TAG_NAME-linux-amd64-dotnet-$env:dotnet_version" `
 	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version" `
 	"$($image):$env:APPVEYOR_REPO_TAG_NAME-windows-amd64-dotnet-$env:dotnet_version-1803" `
